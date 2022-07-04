@@ -1,28 +1,38 @@
 <template>
-  <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <div>
+    <SearchBook></SearchBook>
+    <table>
+      <thead>
+        <th>序号</th>
+        <th>书名</th>
+        <th>作者</th>
+        <th>出版社</th>
+        <th>操作</th>
+      </thead>
+      <AllTrs v-for="item in bookList" :key="item.id" :bookList="item"></AllTrs>
+    </table>
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
-
+import AllTrs from './components/AllTrs.vue';
+import SearchBook from './components/input.vue';
 export default {
-  name: 'App',
-  components: {
-    HelloWorld
-  }
-}
+  data() {
+    return {
+      bookList: [],
+    };
+  },
+  methods: {
+    async initBookList() {
+      const { data: res } = await this.$axios.get('/api/getbooks');
+      console.log(res.data);
+      this.bookList = res.data;
+    },
+  },
+  components: { AllTrs },
+  created() {
+    this.initBookList();
+  },
+};
 </script>
-
-<style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
-</style>
