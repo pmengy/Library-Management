@@ -16,7 +16,7 @@
 
 <script>
 import AllTrs from './components/AllTrs.vue';
-import SearchBook from './components/input.vue';
+import SearchBook from './components/SearchInput.vue';
 export default {
   data() {
     return {
@@ -26,11 +26,12 @@ export default {
   methods: {
     async initBookList() {
       const { data: res } = await this.$axios.get('/api/getbooks');
-      console.log(res.data);
+      // console.log(res.data);
       this.bookList = res.data;
     },
+    
   },
-  components: { AllTrs },
+  components: { AllTrs, SearchBook },
   created() {
     this.initBookList();
   },

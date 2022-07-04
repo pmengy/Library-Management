@@ -2,10 +2,10 @@
   <tbody>
     <tr>
       <td>{{ bookList.id }}</td>
-      <td>{{ bookList.name }}</td>
+      <td>{{ bookList.bookname }}</td>
       <td>{{ bookList.author }}</td>
       <td>{{ bookList.publisher }}</td>
-      <td><button>删除</button></td>
+      <td><button @click="del(bookList.id)">删除</button></td>
     </tr>
   </tbody>
 </template>
@@ -25,8 +25,24 @@ export default {
 
   mounted() {},
 
-  methods: {},
+  methods: {
+    delBook(id) {
+      this.$axios({
+        url: '/api/delbook',
+        params: { id },
+      }).then((res) => {
+        if (res.data.code !== 200) {
+          return alert(res.data.msg);
+        } else {
+          alert(res.data.msg);
+        }
+      });
+    },
+    del(id) {
+      this.delBook(id);
+      this.$parent.initBookList();
+    },
+  },
 };
 </script>
 
-<style lang="scss" scoped></style>
