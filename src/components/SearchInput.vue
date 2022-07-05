@@ -33,6 +33,9 @@ export default {
       });
     },
     search() {
+      if (this.input.length === 0) {
+        return alert('Empty input');
+      }
       this.searchBook();
     },
   },

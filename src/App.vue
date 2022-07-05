@@ -1,6 +1,7 @@
 <template>
   <div>
     <SearchBook></SearchBook>
+    <AddFormVue></AddFormVue>
     <table>
       <thead>
         <th>序号</th>
@@ -17,6 +18,7 @@
 <script>
 import AllTrs from './components/AllTrs.vue';
 import SearchBook from './components/SearchInput.vue';
+import AddFormVue from './components/AddForm.vue';
 export default {
   data() {
     return {
@@ -26,12 +28,11 @@ export default {
   methods: {
     async initBookList() {
       const { data: res } = await this.$axios.get('/api/getbooks');
-      // console.log(res.data);
+      console.log(res.data);
       this.bookList = res.data;
     },
-    
   },
-  components: { AllTrs, SearchBook },
+  components: { AllTrs, SearchBook, AddFormVue },
   created() {
     this.initBookList();
   },
