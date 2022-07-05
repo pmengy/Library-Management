@@ -1,7 +1,7 @@
 <template>
-  <div>
-    <input v-model="input" placeholder="请输入书名" />
-    <button @click="search">搜索</button>
+  <div style="width: 15% margin: 10px;">
+    <el-input v-model="input" placeholder="请输入书名" size="mini"></el-input>
+    <el-button type="primary" @click="search" size="mini">搜索</el-button>
   </div>
 </template>
 

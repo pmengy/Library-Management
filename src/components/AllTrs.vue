@@ -5,7 +5,20 @@
       <td>{{ bookList.bookname }}</td>
       <td>{{ bookList.author }}</td>
       <td>{{ bookList.publisher }}</td>
-      <td><button @click="del(bookList.id)">删除</button></td>
+      <td>
+        <el-button @click="del(bookList.id)" type="danger">删除</el-button>
+        <el-popover
+          placement="right"
+          title="图书信息"
+          width="200"
+          trigger="click"
+          :content="info"
+        >
+          <el-button slot="reference" @click="getInfo(bookList.id)"
+            >详情</el-button
+          >
+        </el-popover>
+      </td>
     </tr>
   </tbody>
 </template>
@@ -14,7 +27,9 @@
 export default {
   name: 'MyTr',
   data() {
-    return {};
+    return {
+      info: '',
+    };
   },
   props: {
     bookList: {
@@ -40,9 +55,21 @@ export default {
     },
     del(id) {
       this.delBook(id);
-      this.$parent.initBookList();
+      this.$nextTick(this.$parent.initBookList());
+    },
+    getInfo(id) {
+      this.$axios({
+        url: '/api/getbooks',
+        params: { id },
+      }).then((res) => {
+        // this.info = JSON.stringify(res.data.data[0]);
+        // console.log(res.data.data[0]);
+        this.info=`书名: ${res.data.data[0].bookname}
+        作者: ${res.data.data[0].author}
+        出版社: ${res.data.data[0].author}
+        `
+      });
     },
   },
 };
 </script>
-
