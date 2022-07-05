@@ -2,6 +2,7 @@
   <div style="padding: 20px">
     <div style="display: flex">
       <SearchBook></SearchBook>
+      <div style="width: 30px"></div>
       <AddFormVue></AddFormVue>
     </div>
     <table class="pure-table pure-table-bordered">
@@ -64,6 +65,7 @@ th {
   border-spacing: 0;
   empty-cells: show;
   border: 1px solid #cbcbcb;
+  margin: 10px;
 }
 
 .pure-table caption {
